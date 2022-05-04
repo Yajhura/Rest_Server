@@ -5,7 +5,6 @@ const dbConnection = require("../config/mongoconfig");
 class Server {
   constructor() {
     this.app = express();
-    this.port = process.env.PORT | 3001;
 
     //connectar mongo
     this.conectarDB();
@@ -39,7 +38,7 @@ class Server {
   }
 
   listen() {
-    this.app.listen(this.port || 3001 , () =>
+    this.app.listen(process.env.PORT | 3001 , () =>
       console.log(
         `El servidor se esta ejecutando en el puerto http://localhost:${this.port}`
       )
