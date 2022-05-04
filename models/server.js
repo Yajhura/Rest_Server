@@ -1,6 +1,7 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
 const dbConnection = require("../config/mongoconfig");
+
 class Server {
   constructor() {
     this.app = express();
@@ -22,19 +23,19 @@ class Server {
   }
 
   middlewares() {
-    //CORS
-    this.app.use(cors());
+      // CORS
+      this.app.use( cors() );
 
-    //Lectura y Parseo  del boy
-    this.app.use(express.json());
+      // Lectura y parseo del body
+      this.app.use( express.json() );
 
-    //pagina estatica
-    this.app.use(express.static("public"));
+      // Directorio Público
+      this.app.use( express.static('public') );
   }
 
   routes() {
     //* Path de usuarios
-    this.app.use("/api/user", require("../routes/users.routes"));
+    this.app.use("/api/user", require("../routes/users"));
   }
 
   listen() {
