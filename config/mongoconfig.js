@@ -8,13 +8,7 @@ const dbConnection = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
-    (err, res) => {
-      if (!err) {
-        console.log("db conectada");
-      } else {
-        console.log("error de conexion");
-      }
-    }
+    (err, res) => ( !err ?  console.log("db conectada") :  console.log("no conectada"))
   );
 };
 
