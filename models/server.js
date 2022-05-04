@@ -6,6 +6,9 @@ class Server {
     this.app = express();
     this.port = process.env.PORT | 3001;
 
+    //connectar mongo
+    this.conectarDB();
+
     //middelwares
     this.middlewares();
 
@@ -13,7 +16,7 @@ class Server {
     this.routes();
   }
 
-  //conenctar en mongo
+  //llamar en mongo
   async conectarDB() {
     await dbConnection();
   }
