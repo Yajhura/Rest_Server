@@ -1,7 +1,7 @@
 const express = require("express");
-const cors = require('cors')
+const cors = require("cors");
+const dbConnection = require("../config/mongoconfig");
 class Server {
-
   constructor() {
     this.app = express();
     this.port = process.env.PORT | 3001;
@@ -13,25 +13,26 @@ class Server {
     this.routes();
   }
 
-  middlewares() {
-     //CORS
-     this.app.use(cors())
+  //conenctar en mongo
+  async conectarDB() {
+    await dbConnection();
+  }
 
-     //Lectura y Parseo  del boy
-     this.app.use(express.json())
-    
+  middlewares() {
+    //CORS
+    this.app.use(cors());
+
+    //Lectura y Parseo  del boy
+    this.app.use(express.json());
+
     //pagina estatica
     this.app.use(express.static("public"));
- 
   }
-
 
   routes() {
-      
-   //* Path de usuarios 
-   this.app.use('/api/user',require('../routes/users.routes'))
+    //* Path de usuarios
+    this.app.use("/api/user", require("../routes/users.routes"));
   }
-
 
   listen() {
     this.app.listen(this.port, () =>
@@ -40,7 +41,6 @@ class Server {
       )
     );
   }
-
 }
 
 module.exports = Server;
